@@ -10,13 +10,13 @@
 std::vector<double> length ( std::vector<double> x , std::vector<double> y )
 {
 
-  std::vector<double> output(x.size());
+  std::vector<double> output(x.size()*3);
 
-  for ( int i=0 ; i<(int)x.size() ; i++ )
-    output[i] = pow(x[i]*y[i],.5);
-
-  for ( int i=0 ; i<(int)x.size() ; i++ )
-    printf("%16.8e,%16.8e,%16.8e\n",x[i],y[i],output[i]);
+  for ( int i=0 ; i<(int)x.size() ; i++ ) {
+    output[i*3+0] = x[i];
+    output[i*3+1] = y[i];
+    output[i*3+2] = pow(x[i]*y[i],.5);
+  }
 
   return output;
 
@@ -29,7 +29,13 @@ std::vector<double> length ( std::vector<double> x , std::vector<double> y )
 namespace py = pybind11;
 
 // wrap C++ function with NumPy array IO
-py::array_t<double> py_length(py::array_t<double, py::array::c_style | py::array::forcecast> array) {
+py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecast> array) {
+
+  // check input dimensions
+  if ( array.ndim()     != 2 )
+    throw std::runtime_error("Input should be 2-D NumPy array");
+  if ( array.shape()[1] != 2 )
+    throw std::runtime_error("Input should have size [N,2]");
 
   // allocate std::vector (to pass to the C++ function)
   std::vector<double> x(array.shape()[0]);
@@ -42,17 +48,17 @@ py::array_t<double> py_length(py::array_t<double, py::array::c_style | py::array
   }
 
   // call pure C++ function
-  std::vector<double> result_vec = length(x,y);
+  std::vector<double> result = length(x,y);
 
-  // allocate py::array (to pass the result of the C++ function to Python)
-  auto result        = py::array_t<double>(result_vec.size());
-  auto result_buffer = result.request();
-  double *result_ptr = (double *) result_buffer.ptr;
-
-  // copy std::vector -> py::array
-  std::memcpy(result_ptr,result_vec.data(),result_vec.size()*sizeof(double));
-
-  return result;
+  // return 2-D NumPy array
+  return py::array(py::buffer_info(
+    result.data(),                           /* data as contiguous array  */
+    sizeof(double),                          /* size of one scalar        */
+    py::format_descriptor<double>::format(), /* data type                 */
+    2,                                       /* number of dimensions      */
+    { array.shape()[0] , 3 },                /* shape of the matrix       */
+    { sizeof(double)*3 , sizeof(double) }    /* strides for each axis     */
+  ));
 
 }
 

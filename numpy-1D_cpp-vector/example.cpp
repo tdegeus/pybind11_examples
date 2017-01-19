@@ -54,7 +54,7 @@ PYBIND11_PLUGIN(example) {
 
   py::module m("example", "pybind11 example plugin");
 
-  m.def("multiply", &py_multiply, "Multiply all entries of an 1-D NumPy-array by 10, and convert to int");
+  m.def("multiply", &py_multiply, "Convert all entries of an 1-D NumPy-array to an int, and multiply by 10");
 
   return m.ptr();
 

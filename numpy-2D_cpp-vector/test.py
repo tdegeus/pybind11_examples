@@ -3,5 +3,6 @@ import numpy as np
 import example
 
 
-print(example.length(np.arange(10).reshape(5,2)))
+A = example.length(np.arange(10).reshape(5,2))
 
+print(A)

@@ -7,15 +7,17 @@
 // pure C++ code
 // -------------
 
-std::vector<double> length ( std::vector<double> x , std::vector<double> y )
+std::vector<double> length ( std::vector<double>& pos )
 {
 
-  std::vector<double> output(x.size()*3);
+  int N = (int)pos.size()/2;
 
-  for ( int i=0 ; i<(int)x.size() ; i++ ) {
-    output[i*3+0] = x[i];
-    output[i*3+1] = y[i];
-    output[i*3+2] = pow(x[i]*y[i],.5);
+  std::vector<double> output(N*3);
+
+  for ( int i=0 ; i<N ; i++ ) {
+    output[i*3+0] = pos[i*2+0];
+    output[i*3+1] = pos[i*2+1];
+    output[i*3+2] = pow(pos[i*2+0]*pos[i*2+1],.5);
   }
 
   return output;
@@ -38,17 +40,13 @@ py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecas
     throw std::runtime_error("Input should have size [N,2]");
 
   // allocate std::vector (to pass to the C++ function)
-  std::vector<double> x(array.shape()[0]);
-  std::vector<double> y(array.shape()[0]);
+  std::vector<double> pos(array.size());
 
   // copy py::array -> std::vector
-  for ( int i=0 ; i<(int)array.shape()[0] ; i++ ) {
-    x[i] = array.data()[i*array.shape()[1]+0];
-    y[i] = array.data()[i*array.shape()[1]+1];
-  }
+  std::memcpy(pos.data(),array.data(),array.size()*sizeof(double));
 
   // call pure C++ function
-  std::vector<double> result = length(x,y);
+  std::vector<double> result = length(pos);
 
   // return 2-D NumPy array
   return py::array(py::buffer_info(

@@ -7,7 +7,7 @@
 // pure C++ code
 // -------------
 
-std::vector<int> multiply ( std::vector<double> input )
+std::vector<int> multiply ( std::vector<double>& input )
 {
 
   std::vector<int> output(input.size());

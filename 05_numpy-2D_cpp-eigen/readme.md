@@ -1,13 +1,7 @@
 
 # Overview
 
-From both the Python side and the C++ side, this example features a custom `CustomVectorXd` class with one function `mul`. This class uses the [`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) library. 
-
-Furthermore, this example has a function `trans` (totally unrelated to the custom `CustomVectorXd` class). It's purpose is to show how to return a new `Eigen::VectorXi` (or `NumPy`-array).
-
-As observed the combination of PyBind11 and Eigen trivially results in a wrapper that can accept NumPy-arrays.
-
->   The `CustomVectorXd::mul` function also includes an example of a default value. From the Python-side also a keyword-argument is enabled.
+From both the Python and the C++ side, this example features a module `example` with two functions `det` and `inv`. This function uses the [`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) library. As observed this trivially results in a wrapper that can accept NumPy-arrays.
 
 # Compiling
 

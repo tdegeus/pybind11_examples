@@ -1,11 +1,20 @@
 
 # Overview
 
-From both the Python side as well as from the C++ side, this example features a module `example` with one function `multipy`. It converts the entries from a one-dimensional array to integers, and then multiplies these entries by 10.
+From both the Python and the C++ side, this example features a module `example` with one function `multipy`. It converts the entries from a one-dimensional array to integers, and then multiplies these entries by 10.
 
 From an implementation perspective, the purpose of this example is to show how to have a function accept an 1-D NumPy array, how to convert this to the standard C++ `std::vector`, and how to return an 1-D NumPy array. As is observed in the test case, the `pybind11`-interface is so flexible that it even accepts list inputs.
 
 # Compiling
+
+The compiling instructions are generated from `CMakeLists.txt`, and then compiled using
+
+```bash
+cmake .
+make
+```
+
+Compiling can also be performed directly using:
 
 ```bash
 c++ -O3 -shared -std=gnu++11 -I ../pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC
@@ -17,4 +26,4 @@ The example can now be run (from this folder) by
 python3 test.py
 ```
 
->   To run with Python 2, simply replace the two occurrences of "python3" above with "python".
+>   To run with Python 2, simply replace the two occurrences of "python3" above with "python". To modify the `cmake` instructions find more [online](http://pybind11.readthedocs.io/en/master/compiling.html?highlight=cmake)

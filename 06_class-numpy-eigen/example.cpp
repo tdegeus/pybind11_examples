@@ -14,7 +14,7 @@ class CustomVectorXd
 
   public:
     CustomVectorXd(Eigen::VectorXd data);
-    Eigen::VectorXd mul(double factor);
+    Eigen::VectorXd mul(double factor=1.);
 };
 
 // ----------------
@@ -58,7 +58,7 @@ PYBIND11_PLUGIN(example) {
 
   py::class_<CustomVectorXd>(m, "CustomVectorXd")
   .def(py::init<Eigen::VectorXd>())
-  .def("mul", &CustomVectorXd::mul)
+  .def("mul", &CustomVectorXd::mul,pybind11::arg("factor")=1.)
   .def("__repr__",
     [](const CustomVectorXd &a) {
       return "<example.CustomVectorXd>";

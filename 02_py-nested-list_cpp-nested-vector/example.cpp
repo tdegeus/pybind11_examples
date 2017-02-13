@@ -7,16 +7,16 @@
 // ----------------
 
 // description: multiply all entries by 2.0
-// input:       nested std::vector ([[...],[...]])
+// input:       nested std::vector ([[...],[...]]) (not modified)
 // output:      nested std::vector ([[...],[...]]) (new copy)
 std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& inputVector) {
 
   std::vector<std::vector<double>> outputVector;
 
   std::transform(
-    inputVector.begin(), 
-    inputVector.end(), 
-    std::back_inserter(outputVector), 
+    inputVector.begin(),
+    inputVector.end(),
+    std::back_inserter(outputVector),
     [](const std::vector<double> &iv) {
       std::vector<double> dv;
       std::transform(iv.begin(), iv.end(), std::back_inserter(dv), [](double x) -> double { return 2.*x; });
@@ -25,7 +25,7 @@ std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& inputV
   );
 
   return outputVector;
-  
+
 }
 
 // ----------------

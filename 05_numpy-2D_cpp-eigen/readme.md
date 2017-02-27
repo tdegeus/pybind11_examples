@@ -12,7 +12,7 @@ cmake .
 make
 ```
 
-Compiling can also be performed directly. To compile both the `pybind11` headers and the `Eigen` headers have to be include:
+Compiling can also be performed directly. To compile both the `pybind11` headers and the `Eigen` headers have to be included:
 
 ```bash
 c++ -O3 -shared -std=gnu++11 -I /path/to/eigen -I ../pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC

@@ -6,7 +6,7 @@ From the [`pybind11` readme](https://github.com/pybind/pybind11):
 >
 >   The main issue with `Boost.Python` - and the reason for creating such a similar project — is `Boost`. `Boost` is an enormously large and complex suite of utility libraries that works with almost every C++ compiler in existence. ... Now that C++11-compatible compilers are widely available, this heavy machinery has become an excessively large and unnecessary dependency.
 
-This repository contains several examples for the usage of `pybind11`. Even though the [online documentation](http://pybind11.readthedocs.io) provided by the developers of `pybind11` makes the usage of it relatively straightforward, several examples - such as provided here - make `pybind11` even easier to use. These example are meant for you to start quicker with `pybind11`. They are however by no means exhaustive, and do not always provide the optimal choice. Therefore it is highly advisable to 'think for yourself'. Furthermore, contributions with similar simple examples are highly welcomed.
+This repository contains several examples for the usage of `pybind11`. Even though the [online documentation](http://pybind11.readthedocs.io) provided by the developers of `pybind11` makes the usage of it relatively straightforward, several examples - such as provided here - make `pybind11` even easier to use. These example are meant for you to start quicker with `pybind11`. They are however by no means exhaustive, and do not always provide the optimal choice. Therefore it is highly advisable to **think for yourself**. Furthermore, contributions with similar simple examples are highly welcomed.
 
 To give credit where credit is due:
 
@@ -48,13 +48,13 @@ The [`Eigen`](http://eigen.tuxfamily.org)-library is used in some of the `NumPy`
     brew install eigen
     ```
 
-    then compile with
+    Then, compile with
 
     ```bash
     -I /usr/local/Cellar/eigen/3.3.1/include/eigen3
     ```
 
-    (or something similar specialized to your installation).
+    (or something similar specialized to your installation). Note that `CMake` can find `Eigen` independently (see below).
 
 # CMake
 
@@ -79,7 +79,7 @@ make
 
 ## Using `Eigen`
 
-When `Eigen` is installed it can be easily included using:
+When `Eigen` is installed it can be easily included; consider the following `CMakeLists.txt`:
 
 ```bash
 cmake_minimum_required(VERSION 2.8.12)

@@ -51,12 +51,8 @@ py::array_t<int> py_multiply(py::array_t<double, py::array::c_style | py::array:
 
 // wrap as Python module
 PYBIND11_PLUGIN(example) {
-
   py::module m("example", "pybind11 example plugin");
-
   m.def("multiply", &py_multiply, "Convert all entries of an 1-D NumPy-array to an int, and multiply by 10");
-
   return m.ptr();
-
 }
 

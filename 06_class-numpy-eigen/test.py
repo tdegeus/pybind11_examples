@@ -3,21 +3,11 @@ import example
 
 A     = np.arange(10)
 
-print('allocate:')
-print('A         ->',A)
+print('A = \n',A)
 
 array = example.CustomVectorXd(A)
 
-print('call 1:')
-print('A         ->',A)
-print('array.mul -> ',array.mul())
+print('array.mul(default) = \n'   ,array.mul()          )
+print('array.mul(factor=100) = \n',array.mul(factor=100))
 
-print('call 1:')
-print('A         ->',A)
-print('array.mul -> ',array.mul(factor=100))
-
-B     = example.trans(A)
-
-print('call 3:')
-print('A         ->',A)
-print('B         ->',B)
+print('trans(A) = \n',example.trans(A))

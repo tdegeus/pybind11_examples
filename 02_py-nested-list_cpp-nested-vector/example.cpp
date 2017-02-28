@@ -6,9 +6,9 @@
 // Regular C++ code
 // ----------------
 
-// description: multiply all entries by 2.0
-// input:       nested std::vector ([[...],[...]]) (not modified)
-// output:      nested std::vector ([[...],[...]]) (new copy)
+// multiply all entries by 2.0
+// input:  nested std::vector ([[...],[...]]) (read-only)
+// output: nested std::vector ([[...],[...]]) (new copy)
 std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& inputVector) {
 
   std::vector<std::vector<double>> outputVector;
@@ -36,9 +36,7 @@ namespace py = pybind11;
 
 PYBIND11_PLUGIN(example) {
     py::module m("example", "pybind11 example plugin");
-
     m.def("modify", &modify, "Multiply all entries of a nested list by 2.0");
-
     return m.ptr();
 }
 

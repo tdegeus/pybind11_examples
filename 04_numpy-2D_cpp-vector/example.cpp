@@ -62,12 +62,8 @@ py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecas
 
 // wrap as Python module
 PYBIND11_PLUGIN(example) {
-
   py::module m("example", "pybind11 example plugin");
-
   m.def("length", &py_length, "Calculate the length of an array of vectors");
-
   return m.ptr();
-
 }
 

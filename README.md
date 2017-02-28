@@ -7,6 +7,15 @@
 - [Dependencies](#dependencies)
     - [Eigen](#eigen)
     - [CMake](#cmake)
+- [Examples](#examples)
+    - [`01_py-list_cpp-vector`](#01py-listcpp-vector)
+    - [`02_py-nested-list_cpp-nested-vector`](#02py-nested-listcpp-nested-vector)
+    - [`03_numpy-1D_cpp-vector`](#03numpy-1dcpp-vector)
+    - [`04_numpy-2D_cpp-vector`](#04numpy-2dcpp-vector)
+    - [`05_numpy-2D_cpp-eigen`](#05numpy-2dcpp-eigen)
+    - [`06_class-numpy-eigen`](#06class-numpy-eigen)
+    - [`07_cpp-overload-scalar`](#07cpp-overload-scalar)
+    - [`08_cpp-overload-eigen`](#08cpp-overload-eigen)
 
 <!-- /MarkdownTOC -->
 
@@ -115,3 +124,98 @@ set(CMAKE_CXX_STANDARD 14)
 ```
 
 in `CMakeLists.txt`.
+
+# Examples
+
+## `01_py-list_cpp-vector`
+
+One function `modify` that takes a list (read-only), multiplies all entries by two, and returns it as a list of doubles (see [`example.cpp`](01_py-list_cpp-vector/example.cpp)). From Python this function is contained in a simple module `example` (see [`test.py`](01_py-list_cpp-vector/test.py)).
+
+The purpose of this example is to show how to have a function accept a list, how to convert this to the standard C++ `std::vector`, and how to return a new `std::vector` (or list).
+
+To compile, either employ `cmake`, whereby the compilation instructions are read from `CMakeLists.txt`:
+
+```bash
+cmake .
+make
+```
+
+Or, compile directly using:
+
+```bash
+c++ -O3 -shared -std=gnu++11 -I ./pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC
+```
+
+Run the example by:
+
+```bash
+python3 test.py
+```
+
+>   To run with Python 2, simply replace the two occurrences of "python3" above with "python". To modify the `cmake` instructions find more [online](http://pybind11.readthedocs.io/en/master/compiling.html?highlight=cmake).
+
+## `02_py-nested-list_cpp-nested-vector`
+
+Same as the [previous example](#01py-listcpp-vector), but with a nested list.
+
+>   To compile and run follow the instructions [above](#01py-listcpp-vector).
+
+## `03_numpy-1D_cpp-vector`
+
+One function `modify` that converts the entries from a one-dimensional array to integers, and then multiplies these entries by 10.
+
+The purpose of this example is to show how to have a function accept an 1-D NumPy array, how to convert this to the standard C++ `std::vector`, and how to return an 1-D NumPy array. As is observed in the test case, the `pybind11`-interface is so flexible that it even accepts list inputs.
+
+>   To compile and run follow the instructions [above](#01py-listcpp-vector).
+
+## `04_numpy-2D_cpp-vector`
+
+One function `length`. This function accepts a 'matrix' in which comprises a list of 2-D position vectors, as rows. The result is again a 'matrix' with for each row the "x" and "y" position, and the length of the 2-D position vector.
+
+>   To compile and run follow the instructions [above](#01py-listcpp-vector).
+
+## `05_numpy-2D_cpp-eigen`
+
+Two functions `det` and `inv` that use the [`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) library. 
+
+The purpose of this example is to show how trivial the interaction between C++/Eigen and Python/NumPy is.
+
+To compile using `cmake` and to run, follow the instructions [above](#01py-listcpp-vector). To compile directly, additionally the `Eigen`-headers have to be included:
+
+```bash
+c++ -O3 -shared -std=gnu++11 -I /path/to/eigen -I ./pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC
+```
+
+For example on macOS with homebrew:
+
+```bash
+c++ -O3 -shared -std=gnu++11 -I /usr/local/Cellar/eigen/3.3.1/include/eigen3 -I ./pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC
+```
+
+## `06_class-numpy-eigen`
+
+A custom `CustomVectorXd` class with one function `mul`. This class uses the [`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) library. It also includes a default argument.
+
+Furthermore, this example has a function `trans` (totally unrelated to the custom `CustomVectorXd` class). It's purpose is to show how to return a new `Eigen::VectorXi` (or `NumPy`-array).
+
+>   To compile and run follow the instructions [above](#05numpy-2dcpp-eigen).
+
+## `07_cpp-overload-scalar`
+
+One overloaded function `mul`. This function acts 'differently' if it is called with `int` arguments or `double` arguments. Notice that the default behavior of `pybind11` is quite robust. When calling the function with one `int` and one `double` argument, the module will choose the `double` version of `mul` (and will cast the `int` argument to a `double`).
+
+To compile using `cmake` and to run, follow the instructions [above](#01py-listcpp-vector). To compile directly, make sure that the `C++14`-standard is used:
+
+```bash
+c++ -O3 -shared -std=gnu++14 ./pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC
+```
+
+## `08_cpp-overload-eigen`
+
+Similar to the [previous example](#08cpp-overload-eigen), but with Eigen arguments (i.e. NumPy arguments from the Python side).
+
+To compile using `cmake` and to run, follow the instructions [above](#01py-listcpp-vector). To compile directly, make sure that the `C++14`-standard is used, and that the `Eigen`-headers are included:
+
+```bash
+c++ -O3 -shared -std=gnu++14 -I /path/to/eigen -I ./pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC
+```

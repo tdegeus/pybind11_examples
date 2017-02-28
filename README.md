@@ -1,23 +1,19 @@
 # pybind11_examples
 
-<!-- MarkdownTOC -->
-
 - [Introduction](#introduction)
 - [Cloning this repository](#cloning-this-repository)
 - [Dependencies](#dependencies)
     - [Eigen](#eigen)
     - [CMake](#cmake)
 - [Examples](#examples)
-    - [01_py-list_cpp-vector](#01py-listcpp-vector)
-    - [02_py-nested-list_cpp-nested-vector](#02py-nested-listcpp-nested-vector)
-    - [03_numpy-1D_cpp-vector](#03numpy-1dcpp-vector)
-    - [04_numpy-2D_cpp-vector](#04numpy-2dcpp-vector)
-    - [05_numpy-2D_cpp-eigen](#05numpy-2dcpp-eigen)
-    - [06_class-numpy-eigen](#06class-numpy-eigen)
-    - [07_cpp-overload-scalar](#07cpp-overload-scalar)
-    - [08_cpp-overload-eigen](#08cpp-overload-eigen)
-
-<!-- /MarkdownTOC -->
+    - [01_py-list_cpp-vector](#01_py-list_cpp-vector)
+    - [02_py-nested-list_cpp-nested-vector](#02_py-nested-list_cpp-nested-vector)
+    - [03_numpy-1D_cpp-vector](#03_numpy-1D_cpp-vector)
+    - [04_numpy-2D_cpp-vector](#04_numpy-2D_cpp-vector)
+    - [05_numpy-2D_cpp-eigen](#05_numpy-2D_cpp-eigen)
+    - [06_class-numpy-eigen](#06_class-numpy-eigen)
+    - [07_cpp-overload-scalar](#07_cpp-overload-scalar)
+    - [08_cpp-overload-eigen](#08_cpp-overload-eigen)
 
 # Introduction
 

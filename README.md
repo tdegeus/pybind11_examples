@@ -14,6 +14,7 @@
     - [06_class-numpy-eigen](#06_class-numpy-eigen)
     - [07_cpp-overload-scalar](#07_cpp-overload-scalar)
     - [08_cpp-overload-eigen](#08_cpp-overload-eigen)
+    - [09_numpy_cpp-custom-matrix](#09_numpy_cpp-custom-matrix)
 
 # Introduction
 
@@ -213,3 +214,12 @@ To compile using CMake and to run, follow the instructions [above](#01py-listcpp
 ```bash
 c++ -O3 -shared -std=gnu++14 -I /path/to/eigen -I ./pybind11/include `python3-config --cflags --ldflags --libs` example.cpp -o example.so -fPIC
 ```
+
+## 09_numpy_cpp-custom-matrix
+
+This example includes a custom matrix class in C++ (in `matrix.h`). This class is coupled to a NumPy-array using a simple interface (in `pybind_matrix.h`). Consequently the functions (in `example.cpp`) do not necessitate any special wrapper code.
+
+To compile, see [above](#07_cpp-overload-scalar).
+
+See also [this](http://stackoverflow.com/questions/42645228/cast-numpy-array-to-from-custom-c-matrix-class-using-pybind11) discussion of Stack Overflow.
+

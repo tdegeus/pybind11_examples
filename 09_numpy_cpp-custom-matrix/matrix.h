@@ -59,12 +59,8 @@ class Matrix
     // copy constructor
     // ----------------
 
-    Matrix<T>( const Matrix<T> &src )
-    {
-      _data    = src._data;
-      _shape   = src._shape;
-      _strides = src._strides;
-    };
+    Matrix               (const Matrix<T> &) = default;
+    Matrix<T>& operator= (const Matrix<T> &) = default;
 
     // index operators
     // ---------------

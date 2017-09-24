@@ -9,14 +9,14 @@
 // multiply all entries by 2.0
 // input:  nested std::vector ([[...],[...]]) (read-only)
 // output: nested std::vector ([[...],[...]]) (new copy)
-std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& inputVector) {
-
-  std::vector<std::vector<double>> outputVector;
+std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& input)
+{
+  std::vector<std::vector<double>> output;
 
   std::transform(
-    inputVector.begin(),
-    inputVector.end(),
-    std::back_inserter(outputVector),
+    input.begin(),
+    input.end(),
+    std::back_inserter(output),
     [](const std::vector<double> &iv) {
       std::vector<double> dv;
       std::transform(iv.begin(), iv.end(), std::back_inserter(dv), [](double x) -> double { return 2.*x; });
@@ -24,8 +24,7 @@ std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& inputV
     }
   );
 
-  return outputVector;
-
+  return output;
 }
 
 // ----------------
@@ -34,9 +33,9 @@ std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& inputV
 
 namespace py = pybind11;
 
-PYBIND11_PLUGIN(example) {
-    py::module m("example", "pybind11 example plugin");
-    m.def("modify", &modify, "Multiply all entries of a nested list by 2.0");
-    return m.ptr();
-}
+PYBIND11_MODULE(example,m)
+{
+  m.doc() = "pybind11 example plugin";
 
+  m.def("modify", &modify, "Multiply all entries of a nested list by 2.0");
+}

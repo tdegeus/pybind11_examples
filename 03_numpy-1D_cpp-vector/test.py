@@ -2,15 +2,16 @@
 import numpy as np
 import example
 
-A_list  = [0,1,2,3,4,5]
-A_numpy = np.arange(10)
+A = [0,1,2,3,4,5]
+B = example.multiply(A)
 
-B_list  = example.multiply(A_list )
-B_numpy = example.multiply(A_numpy)
+print('input list = ',A)
+print('output     = ',B)
 
-print('A_list  = ',A_list )
-print('A_numpy = ',A_numpy)
-print('B_list  = ',B_list )
-print('B_numpy = ',B_numpy)
+A = np.arange(10)
+B = example.multiply(A)
+
+print('input list = ',A)
+print('output     = ',B)
 
 

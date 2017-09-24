@@ -22,18 +22,21 @@ class CustomVectorXd
 // ----------------
 
 // class-constructor: store the input "Eigen::VectorXd"
-CustomVectorXd::CustomVectorXd(Eigen::VectorXd data_) {
+CustomVectorXd::CustomVectorXd(Eigen::VectorXd data_)
+{
   data = data_;
 }
 
 // return the custom vector, multiplied by a factor
-Eigen::VectorXd CustomVectorXd::mul(double factor) {
+Eigen::VectorXd CustomVectorXd::mul(double factor)
+{
   return factor*data;
 }
 
 // a function that has nothing to do with the class
 // the point is to show how one can return a copy "Eigen::VectorXd"
-Eigen::VectorXi trans(const Eigen::VectorXi& array) {
+Eigen::VectorXi trans(const Eigen::VectorXi& array)
+{
 
   auto N = array.size();
   Eigen::VectorXi out(N);
@@ -50,9 +53,9 @@ Eigen::VectorXi trans(const Eigen::VectorXi& array) {
 
 namespace py = pybind11;
 
-PYBIND11_PLUGIN(example) {
-
-  pybind11::module m("example", "simple example module");
+PYBIND11_MODULE(example,m)
+{
+  m.doc() = "pybind11 example plugin";
 
   m.def("trans", &trans);
 
@@ -64,7 +67,4 @@ PYBIND11_PLUGIN(example) {
       return "<example.CustomVectorXd>";
     }
   );
-
-  return m.ptr();
-
 }

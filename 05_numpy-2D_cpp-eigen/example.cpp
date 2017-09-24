@@ -12,11 +12,13 @@
 // regular C++ code
 // ----------------
 
-Eigen::MatrixXd inv(Eigen::MatrixXd xs) {
+Eigen::MatrixXd inv(Eigen::MatrixXd xs)
+{
     return xs.inverse();
 }
 
-double det(Eigen::MatrixXd xs) {
+double det(Eigen::MatrixXd xs)
+{
     return xs.determinant();
 }
 
@@ -26,9 +28,11 @@ double det(Eigen::MatrixXd xs) {
 
 namespace py = pybind11;
 
-PYBIND11_PLUGIN(example) {
-    pybind11::module m("example", "simple example module");
-    m.def("inv", &inv);
-    m.def("det", &det);
-    return m.ptr();
+PYBIND11_MODULE(example,m)
+{
+  m.doc() = "pybind11 example plugin";
+
+  m.def("inv", &inv);
+
+  m.def("det", &det);
 }

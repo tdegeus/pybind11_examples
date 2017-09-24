@@ -9,14 +9,12 @@
 
 std::vector<int> multiply ( std::vector<double>& input )
 {
-
   std::vector<int> output(input.size());
 
   for ( int i=0 ; i<(int)input.size() ; i++ )
     output[i] = 10*(int)input[i];
 
   return output;
-
 }
 
 // ----------------
@@ -26,7 +24,8 @@ std::vector<int> multiply ( std::vector<double>& input )
 namespace py = pybind11;
 
 // wrap C++ function with NumPy array IO
-py::array_t<int> py_multiply(py::array_t<double, py::array::c_style | py::array::forcecast> array) {
+py::array_t<int> py_multiply(py::array_t<double, py::array::c_style | py::array::forcecast> array)
+{
 
   // allocate std::vector (to pass to the C++ function)
   std::vector<double> array_vec(array.size());
@@ -50,9 +49,9 @@ py::array_t<int> py_multiply(py::array_t<double, py::array::c_style | py::array:
 }
 
 // wrap as Python module
-PYBIND11_PLUGIN(example) {
-  py::module m("example", "pybind11 example plugin");
-  m.def("multiply", &py_multiply, "Convert all entries of an 1-D NumPy-array to an int, and multiply by 10");
-  return m.ptr();
-}
+PYBIND11_MODULE(example,m)
+{
+  m.doc() = "pybind11 example plugin";
 
+  m.def("multiply", &py_multiply, "Convert all entries of an 1-D NumPy-array to int and multiply by 10");
+}

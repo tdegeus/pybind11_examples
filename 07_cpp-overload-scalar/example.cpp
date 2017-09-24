@@ -23,9 +23,10 @@ int mul ( int a , int b )
 
 namespace py = pybind11;
 
-PYBIND11_PLUGIN(example) {
-    pybind11::module m("example", "simple example module");
-    m.def("mul", py::overload_cast<int   ,int   >(&mul) );
-    m.def("mul", py::overload_cast<double,double>(&mul) );
-    return m.ptr();
+PYBIND11_MODULE(example,m)
+{
+  m.doc() = "pybind11 example plugin";
+
+  m.def("mul", py::overload_cast<int   ,int   >(&mul) );
+  m.def("mul", py::overload_cast<double,double>(&mul) );
 }

@@ -25,8 +25,9 @@ Matrix<double> mul ( Matrix<double> A, Matrix<double> B )
 
 namespace py = pybind11;
 
-PYBIND11_PLUGIN(example) {
-    pybind11::module m("example", "simple example module");
-    m.def("mul", &mul );
-    return m.ptr();
+PYBIND11_MODULE(example,m)
+{
+  m.doc() = "pybind11 example plugin";
+
+  m.def("mul", &mul );
 }

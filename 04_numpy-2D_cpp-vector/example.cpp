@@ -31,7 +31,8 @@ std::vector<double> length ( std::vector<double>& pos )
 namespace py = pybind11;
 
 // wrap C++ function with NumPy array IO
-py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecast> array) {
+py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecast> array)
+{
 
   // check input dimensions
   if ( array.ndim()     != 2 )
@@ -48,22 +49,26 @@ py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecas
   // call pure C++ function
   std::vector<double> result = length(pos);
 
+  ssize_t              ndim    = 2;
+  std::vector<ssize_t> shape   = { array.shape()[0] , 3 };
+  std::vector<ssize_t> strides = { sizeof(double)*3 , sizeof(double) };
+
   // return 2-D NumPy array
   return py::array(py::buffer_info(
     result.data(),                           /* data as contiguous array  */
     sizeof(double),                          /* size of one scalar        */
     py::format_descriptor<double>::format(), /* data type                 */
-    2,                                       /* number of dimensions      */
-    { array.shape()[0] , 3 },                /* shape of the matrix       */
-    { sizeof(double)*3 , sizeof(double) }    /* strides for each axis     */
+    ndim,                                    /* number of dimensions      */
+    shape,                                   /* shape of the matrix       */
+    strides                                  /* strides for each axis     */
   ));
 
 }
 
 // wrap as Python module
-PYBIND11_PLUGIN(example) {
-  py::module m("example", "pybind11 example plugin");
-  m.def("length", &py_length, "Calculate the length of an array of vectors");
-  return m.ptr();
-}
+PYBIND11_MODULE(example,m)
+{
+  m.doc() = "pybind11 example plugin";
 
+  m.def("length", &py_length, "Calculate the length of an array of vectors");
+}

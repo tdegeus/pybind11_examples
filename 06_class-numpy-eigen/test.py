@@ -1,7 +1,7 @@
 import numpy as np
 import example
 
-A     = np.arange(10)
+A = np.arange(10)
 
 print('A = \n',A)
 

@@ -1,4 +1,4 @@
-# pybind11_examples
+# Contents
 
 - [Introduction](#introduction)
 - [Cloning this repository](#cloning-this-repository)
@@ -24,7 +24,7 @@ The power of [pybind11](https://github.com/pybind/pybind11) is captured by the f
 >
 >   The main issue with Boost.Python - and the reason for creating such a similar project — is Boost. Boost is an enormously large and complex suite of utility libraries that works with almost every C++ compiler in existence. ... Now that C++11-compatible compilers are widely available, this heavy machinery has become an excessively large and unnecessary dependency.
 
-This repository contains several examples for the usage of pybind11. Even though the [online documentation](http://pybind11.readthedocs.io) provided by the developers of pybind11 makes the usage of it relatively straightforward, several examples - such as provided here - make pybind11 even easier to use. These example are meant for you to start quicker with pybind11. They are however by no means exhaustive, and do not always provide the optimal choice. Therefore it is highly advisable to **think for yourself**. Furthermore, contributions with similar simple examples (or by further improving existing examples) are highly welcomed.
+This repository contains several examples for the usage of pybind11. Even though the [online documentation](http://pybind11.readthedocs.io) provided by the developers of pybind11 makes the usage of it relatively straightforward, several examples - such as provided here - make pybind11 even easier to use. These examples are meant for you to start quicker with pybind11. They are, however, by no means exhaustive, and do not always provide the optimal choice. Therefore it is highly advisable to **think for yourself**. Furthermore, contributions with similar simple examples (or by further improving existing examples) are highly welcome.
 
 To give credit where credit is due:
 
@@ -32,7 +32,11 @@ To give credit where credit is due:
 
 *   The examples made available by [Cliburn Chan and Janice McCarthy, at Duke University](http://people.duke.edu/~ccc14/sta-663-2016/18G_C++_Python_pybind11.html) have been of enormous help. Please also read their [documentation](http://people.duke.edu/~ccc14/sta-663-2016/18G_C++_Python_pybind11.html).
 
-Note that there are also test-cases included in the [pybind11 repository](https://github.com/pybind/pybind11), but these are not very insightful when you are new to pybind11.
+Note that there are also test cases included in the [pybind11 repository](https://github.com/pybind/pybind11), but these are not very insightful when you are new to pybind11.
+
+Finally, pybind11 is actively used. So one can look in actively maintained libraries for specific solutions. For example:
+
+*   [cppmat](http://cppmat.geus.me) is a library that provided multi-dimensional arrays in C++, much like the [Eigen](http://eigen.tuxfamily.org) library does for one- and two-dimensional arrays. It also provides a pybind11 interface, such that creating a Python module that uses cppmat function at its back-end as function arguments or returns becomes trivial.
 
 # Cloning this repository
 
@@ -76,10 +80,16 @@ Eigen does not need installation because it is also header-only. One just needs 
     Then, compile with
 
     ```bash
-    -I /usr/local/Cellar/eigen/3.3.1/include/eigen3
+    clang++ -I/usr/local/Cellar/eigen/3.3.1/include/eigen3 ...
     ```
 
-    (or something similar specialized to your installation). Note that CMake can find Eigen independently (see below).
+    (or something similar specialized to your installation). Note that, when properly configured, pkg-config can also be used to keep track of the paths. To compile
+
+    ```bash
+    clang++ `pkg-config --cflags eigen3` ...
+    ```
+
+     Along the same lines, CMake can also find Eigen independently (see below).
 
 ## CMake
 
@@ -120,13 +130,15 @@ The C++14 standard can be used by including the following in `CMakeLists.txt`:
 set(CMAKE_CXX_STANDARD 14)
 ```
 
+> Personally, I mostly build my Python modules using the Python mechanism (e.g. `python3 setup.py install`). For this I have included some tools in [cppmat](http://cppmat.geus.me). These can be installed with pip (e.g. `pip3 install cppmat`). For example [GooseTensor](https://github.com/tdegeus/GooseTensor) uses this mechanisms, but several other of [my repositories](https://github.com/tdegeus) do too.
+
 # Examples
 
 ## 01_py-list_cpp-vector
 
 This example features one function `modify` that takes a list (read-only), multiplies all entries by two, and returns it as a list of doubles (see [`example.cpp`](01_py-list_cpp-vector/example.cpp)). From Python this function is contained in a simple module `example` (see [`test.py`](01_py-list_cpp-vector/test.py)).
 
-The purpose of this example is to show how to make a function accept a list, how to convert this to the standard C++ `std::vector`, and how to return a new `std::vector` (or list).
+The purpose of this example is to show how to make a function accept a list, how to convert this to the standard C++ `std::vector`, and how to return a new `std::vector` (or list). Note that the actual operations is not very important, it is the interface that is illustrated.
 
 To compile, either employ CMake, whereby the compilation instructions are read from [`CMakeLists.txt`](01_py-list_cpp-vector/CMakeLists.txt) by subsequently:
 
@@ -159,7 +171,7 @@ To compile and run follow the instructions [above](#01py-listcpp-vector).
 
 One function `modify` that converts the entries from a one-dimensional array to integers, and then multiplies these entries by 10.
 
-The purpose of this example is to show how to make a function accept an 1-D NumPy array, how to convert this to the standard C++ `std::vector`, and how to return an 1-D NumPy array. Note that the interface generated using pybind11 is so flexible that it even accepts list inputs.
+The purpose of this example is to show how to make a function accept a 1-D NumPy array, how to convert this to the standard C++ `std::vector`, and how to return a 1-D NumPy array. Note that the interface generated using pybind11 is so flexible that it even accepts list inputs on the Python side.
 
 To compile and run follow the instructions [above](#01py-listcpp-vector).
 

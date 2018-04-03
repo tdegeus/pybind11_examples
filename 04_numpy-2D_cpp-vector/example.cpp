@@ -7,21 +7,19 @@
 // pure C++ code
 // -------------
 
-std::vector<double> length ( std::vector<double>& pos )
+std::vector<double> length(const std::vector<double>& pos)
 {
-
-  int N = (int)pos.size()/2;
+  size_t N = pos.size() / 2;
 
   std::vector<double> output(N*3);
 
-  for ( int i=0 ; i<N ; i++ ) {
+  for ( size_t i = 0 ; i < N ; ++i ) {
     output[i*3+0] = pos[i*2+0];
     output[i*3+1] = pos[i*2+1];
-    output[i*3+2] = pow(pos[i*2+0]*pos[i*2+1],.5);
+    output[i*3+2] = std::pow(pos[i*2+0]*pos[i*2+1],.5);
   }
 
   return output;
-
 }
 
 // ----------------
@@ -33,7 +31,6 @@ namespace py = pybind11;
 // wrap C++ function with NumPy array IO
 py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecast> array)
 {
-
   // check input dimensions
   if ( array.ndim()     != 2 )
     throw std::runtime_error("Input should be 2-D NumPy array");
@@ -62,7 +59,6 @@ py::array py_length(py::array_t<double, py::array::c_style | py::array::forcecas
     shape,                                   /* shape of the matrix       */
     strides                                  /* strides for each axis     */
   ));
-
 }
 
 // wrap as Python module

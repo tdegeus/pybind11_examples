@@ -5,13 +5,13 @@
 // regular C++ code
 // ----------------
 
-double mul ( double a , double b )
+double mul(double a, double b)
 {
   std::cout << "Double" << std::endl;
   return a*b;
 }
 
-int mul ( int a , int b )
+int mul(int a, int b)
 {
   std::cout << "Int" << std::endl;
   return a*b;

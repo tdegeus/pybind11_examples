@@ -9,7 +9,7 @@
 // multiply all entries by 2.0
 // input:  nested std::vector ([[...],[...]]) (read-only)
 // output: nested std::vector ([[...],[...]]) (new copy)
-std::vector<std::vector<double>> modify(std::vector<std::vector<double>>& input)
+std::vector<std::vector<double>> modify(const std::vector<std::vector<double>>& input)
 {
   std::vector<std::vector<double>> output;
 

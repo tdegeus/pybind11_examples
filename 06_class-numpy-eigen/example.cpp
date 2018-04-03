@@ -10,11 +10,16 @@
 // a custom vector-class, with one function "mul"
 class CustomVectorXd
 {
-  Eigen::VectorXd data;
+private:
 
-  public:
-    CustomVectorXd(Eigen::VectorXd data);
-    Eigen::VectorXd mul(double factor=1.);
+  Eigen::VectorXd m_data;
+
+public:
+
+  CustomVectorXd(const Eigen::VectorXd &data);
+
+  Eigen::VectorXd mul(double factor=1.);
+
 };
 
 // ----------------
@@ -22,26 +27,25 @@ class CustomVectorXd
 // ----------------
 
 // class-constructor: store the input "Eigen::VectorXd"
-CustomVectorXd::CustomVectorXd(Eigen::VectorXd data_)
+CustomVectorXd::CustomVectorXd(const Eigen::VectorXd &data) : m_data(data)
 {
-  data = data_;
 }
 
 // return the custom vector, multiplied by a factor
 Eigen::VectorXd CustomVectorXd::mul(double factor)
 {
-  return factor*data;
+  return factor*m_data;
 }
 
 // a function that has nothing to do with the class
 // the point is to show how one can return a copy "Eigen::VectorXd"
 Eigen::VectorXi trans(const Eigen::VectorXi& array)
 {
-
   auto N = array.size();
+
   Eigen::VectorXi out(N);
 
-  for ( auto i=0 ; i<N ; i++ )
+  for ( auto i = 0 ; i < N ; ++i )
     out[array.size()-i-1] = array[i];
 
   return out;

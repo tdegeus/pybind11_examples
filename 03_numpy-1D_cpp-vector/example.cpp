@@ -7,12 +7,12 @@
 // pure C++ code
 // -------------
 
-std::vector<int> multiply ( std::vector<double>& input )
+std::vector<int> multiply(const std::vector<double>& input)
 {
   std::vector<int> output(input.size());
 
-  for ( int i=0 ; i<(int)input.size() ; i++ )
-    output[i] = 10*(int)input[i];
+  for ( size_t i = 0 ; i < input.size() ; ++i )
+    output[i] = 10*static_cast<int>(input[i]);
 
   return output;
 }
@@ -26,7 +26,6 @@ namespace py = pybind11;
 // wrap C++ function with NumPy array IO
 py::array_t<int> py_multiply(py::array_t<double, py::array::c_style | py::array::forcecast> array)
 {
-
   // allocate std::vector (to pass to the C++ function)
   std::vector<double> array_vec(array.size());
 
@@ -45,7 +44,6 @@ py::array_t<int> py_multiply(py::array_t<double, py::array::c_style | py::array:
   std::memcpy(result_ptr,result_vec.data(),result_vec.size()*sizeof(int));
 
   return result;
-
 }
 
 // wrap as Python module

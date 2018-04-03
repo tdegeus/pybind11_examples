@@ -12,14 +12,14 @@
 // regular C++ code
 // ----------------
 
-Eigen::MatrixXd inv(Eigen::MatrixXd xs)
+Eigen::MatrixXd inv(const Eigen::MatrixXd &xs)
 {
-    return xs.inverse();
+  return xs.inverse();
 }
 
-double det(Eigen::MatrixXd xs)
+double det(const Eigen::MatrixXd &xs)
 {
-    return xs.determinant();
+  return xs.determinant();
 }
 
 // ----------------

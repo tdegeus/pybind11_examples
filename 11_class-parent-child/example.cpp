@@ -92,16 +92,14 @@ namespace py = pybind11;
 
 PYBIND11_MODULE(example, m)
 {
-  py::class_<Animal, PyAnimal> animal(m, "Animal");
-
-  animal
+  py::class_<Animal, PyAnimal>(m, "Animal")
     .def(py::init<>())
     .def("talk", &Animal::talk);
 
-  py::class_<Dog>(m, "Dog", animal)
+  py::class_<Dog, Animal>(m, "Dog")
     .def(py::init<>());
 
-  py::class_<Cat>(m, "Cat", animal)
+  py::class_<Cat, Animal>(m, "Cat")
     .def(py::init<>());
 
   m.def("talk", &talk, py::arg("animal") ,py::arg("n_times")=1);

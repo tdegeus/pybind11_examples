@@ -1,20 +1,32 @@
 # Contents
 
+<!-- MarkdownTOC -->
+
 - [Introduction](#introduction)
 - [Cloning this repository](#cloning-this-repository)
 - [Dependencies](#dependencies)
-    - [Eigen](#eigen)
+- [Compiling strategies](#compiling-strategies)
+    - [DIY](#diy)
     - [CMake](#cmake)
+        - [Basic usage](#basic-usage)
+        - [Using Eigen](#using-eigen)
+        - [Using the C++14 standard](#using-the-c14-standard)
+    - [setup.py](#setuppy)
 - [Examples](#examples)
     - [01_py-list_cpp-vector](#01_py-list_cpp-vector)
     - [02_py-nested-list_cpp-nested-vector](#02_py-nested-list_cpp-nested-vector)
-    - [03_numpy-1D_cpp-vector](#03_numpy-1D_cpp-vector)
-    - [04_numpy-2D_cpp-vector](#04_numpy-2D_cpp-vector)
-    - [05_numpy-2D_cpp-eigen](#05_numpy-2D_cpp-eigen)
+    - [03_numpy-1D_cpp-vector](#03_numpy-1d_cpp-vector)
+    - [04_numpy-2D_cpp-vector](#04_numpy-2d_cpp-vector)
+    - [05_numpy-2D_cpp-eigen](#05_numpy-2d_cpp-eigen)
     - [06_class-numpy-eigen](#06_class-numpy-eigen)
     - [07_cpp-overload-scalar](#07_cpp-overload-scalar)
     - [08_cpp-overload-eigen](#08_cpp-overload-eigen)
     - [09_numpy_cpp-custom-matrix](#09_numpy_cpp-custom-matrix)
+    - [10_enum](#10_enum)
+    - [11_class-parent-child](#11_class-parent-child)
+
+<!-- /MarkdownTOC -->
+
 
 # Introduction
 

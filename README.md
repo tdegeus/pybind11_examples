@@ -24,6 +24,7 @@
     - [09_numpy_cpp-custom-matrix](#09_numpy_cpp-custom-matrix)
     - [10_enum](#10_enum)
     - [11_class-parent-child](#11_class-parent-child)
+    - [12_crtp](#12_crtp)
     - [13_static_cast](#13_static_cast)
 
 <!-- /MarkdownTOC -->
@@ -265,6 +266,11 @@ This example features a way to interface with an enumerator in C++. In principle
 This example contains a classical example where one or more classes are derived from a certain parent or template. This particular example contains two animals, a `Dog` and a `Cat`, that are both derived from a generic `Animal` class. There is a function `talk` that accepts the generic `Animal` and thus any of the derived classes. 
 
 This particular case requires more involved interface, as is described in [the documentation](http://pybind11.readthedocs.io/en/stable/advanced/classes.html).
+
+## [12_crtp](12_crtp)
+
+This example features a simple CRTP with as 'base' and and a 'derived' class, 
+and its registration to the *pybind11* API.
 
 ## [13_static_cast](13_static_cast)
 

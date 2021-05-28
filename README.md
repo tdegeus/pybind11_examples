@@ -24,6 +24,7 @@
     - [09_numpy_cpp-custom-matrix](#09_numpy_cpp-custom-matrix)
     - [10_enum](#10_enum)
     - [11_class-parent-child](#11_class-parent-child)
+    - [14_cmake_findpython](#14_cmake_findpython)
 
 <!-- /MarkdownTOC -->
 
@@ -265,3 +266,10 @@ This example contains a classical example where one or more classes are derived 
 
 This particular case requires more involved interface, as is described in [the documentation](http://pybind11.readthedocs.io/en/stable/advanced/classes.html).
 
+## [14_cmake_findpython](14_cmake_findpython)
+
+This example features the use of the new *FindPython* in *CMake*.
+In order to use it with *pybind11* one should take care to:
+
+1.  Call `find_package(Python REQUIRED COMPONENTS Interpreter Development ...)` before  `find_package(pybind11 REQUIRED)`.
+2.  Using the command-line `cmake ... -DPython_EXECUTABLE=\`which python\`` to for *CMake* to use a specific *Python* version. 

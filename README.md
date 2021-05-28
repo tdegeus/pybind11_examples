@@ -24,6 +24,7 @@
     - [09_numpy_cpp-custom-matrix](#09_numpy_cpp-custom-matrix)
     - [10_enum](#10_enum)
     - [11_class-parent-child](#11_class-parent-child)
+    - [12_crtp](#12_crtp)
 
 <!-- /MarkdownTOC -->
 
@@ -265,3 +266,7 @@ This example contains a classical example where one or more classes are derived 
 
 This particular case requires more involved interface, as is described in [the documentation](http://pybind11.readthedocs.io/en/stable/advanced/classes.html).
 
+## [12_crtp](12_crtp)
+
+This example features a simple CRTP with as 'base' and and a 'derived' class, 
+and its registration to the *pybind11* API.

@@ -25,6 +25,7 @@
     - [10_enum](#10_enum)
     - [11_class-parent-child](#11_class-parent-child)
     - [12_crtp](#12_crtp)
+    - [13_static_cast](#13_static_cast)
 
 <!-- /MarkdownTOC -->
 
@@ -270,3 +271,11 @@ This particular case requires more involved interface, as is described in [the d
 
 This example features a simple CRTP with as 'base' and and a 'derived' class, 
 and its registration to the *pybind11* API.
+
+## [13_static_cast](13_static_cast)
+
+Sometimes `py::overload_cast` is not able to resolve your function, 
+for example when the return type cannot be inferred.
+In that case you can be explicit by `static_cast`ing a pointer to your function
+More information can be found in [the documentation](https://pybind11.readthedocs.io/en/stable/classes.html?highlight=static_cast#overloaded-methods).
+

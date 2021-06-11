@@ -26,6 +26,7 @@
     - [11_class-parent-child](#11_class-parent-child)
     - [12_crtp](#12_crtp)
     - [13_static_cast](#13_static_cast)
+    - [14_cmake_findpython](#14_cmake_findpython)
 
 <!-- /MarkdownTOC -->
 
@@ -278,4 +279,12 @@ Sometimes `py::overload_cast` is not able to resolve your function,
 for example when the return type cannot be inferred.
 In that case you can be explicit by `static_cast`ing a pointer to your function
 More information can be found in [the documentation](https://pybind11.readthedocs.io/en/stable/classes.html?highlight=static_cast#overloaded-methods).
+
+## [14_cmake_findpython](14_cmake_findpython)
+
+This example features the use of the new *FindPython* in *CMake*.
+In order to use it with *pybind11* one should take care to:
+
+1.  Call `find_package(Python REQUIRED COMPONENTS Interpreter Development ...)` before  `find_package(pybind11 REQUIRED)`.
+2.  Using the command-line `cmake ... -DPython_EXECUTABLE=\`which python\`` to for *CMake* to use a specific *Python* version. 
 

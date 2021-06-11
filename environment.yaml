@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+dependencies:
+  - cmake
+  - make
+  - pybind11
+  - python
+  - numpy
